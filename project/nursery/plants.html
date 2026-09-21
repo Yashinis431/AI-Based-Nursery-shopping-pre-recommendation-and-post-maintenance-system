@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plants – Nursery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="plants-body">
+
+<!-- NAV -->
+<nav class="plants-nav">
+    <a class="plants-nav-brand" href="dashboard.html"><span>🌱</span> Nursery</a>
+    <div class="plants-nav-links">
+        <a href="dashboard.html">Home</a>
+        <a href="#" id="btnRecommend" class="active" onclick="showRecommend(); return false;">⭐ Recommended</a>
+        <a href="#" id="btnAll" onclick="showAll(); return false;">🌿 All Plants</a>
+        <a href="plants-details.html">📋 Plant Details</a>
+    </div>
+    <div class="plants-nav-right">
+        <div class="nav-greet">Welcome, <strong id="greetName">Guest</strong></div>
+        <a class="nav-cart" href="cart.html">
+            🛒 Cart
+            <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+        </a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="plants-hero">
+    <div class="plants-hero-bg"></div>
+
+    <!-- Floating plant images right side -->
+    <div class="hero-plants-float">
+        <div class="hp hp1"><img src="images/Snake-Plant.webp" alt="Snake Plant"></div>
+        <div class="hp hp2"><img src="images/Money-Plant.webp" alt="Money Plant"></div>
+        <div class="hp hp3"><img src="images/croton.webp" alt="Croton"></div>
+    </div>
+
+    <div class="hero-content">
+        <div class="plants-hero-tag"><div class="hero-dot"></div> Smart Gardening</div>
+        <h1>Make a <em>Beautiful</em><br>Garden With<br>Your Own Hand</h1>
+        <p>Find Your Dream Plant for your home decoration with us and we will make it happen — perfectly matched to your space &amp; lifestyle.</p>
+        <div class="hero-btns">
+            <a class="plants-btn-primary" href="#plants">🌿 Explore Plants</a>
+            <a class="btn-outline" href="plants-details.html">📋 Plant Details</a>
+        </div>
+    </div>
+</section>
+
+<!-- PLANTS SECTION -->
+<section class="plants-section" id="plants">
+    <div class="section-header">
+        <div>
+            <div class="section-title">Our <em>Plant</em> Collection</div>
+            <div class="section-sub">Click any plant to add it to your cart</div>
+        </div>
+        <div class="tab-pills">
+            <button class="tab-pill active" id="tabRecommend" onclick="showRecommend()">⭐ Recommended</button>
+            <button class="tab-pill" id="tabAll" onclick="showAll()">🌿 All Plants</button>
+        </div>
+    </div>
+
+    <div class="plant-grid" id="plantGrid">
+
+        <div class="plant-card" id="snake">
+            <div class="plant-card-img">
+                <img src="images/Snake-Plant.webp" alt="Snake Plant">
+                <span class="badge-place">🏠 Indoor</span>
+                <span class="badge-sun">Low Light</span>
+                <button class="card-arrow" onclick="addToCart('Snake Plant','images/Snake-Plant.webp','5.5 - 7.5',150)">→</button>
+            </div>
+            <div class="plant-card-body">
+                <h3>Snake Plant</h3>
+                <div class="tag-row">
+                    <span class="tag tag-green">🏠 Indoor</span>
+                    <span class="tag tag-blue">💧 Rare Water</span>
+                    <span class="tag tag-purple">🔆 Low Light</span>
+                </div>
+                <p class="card-desc">Perfect beginner plant. Purifies air and thrives in dim corners.</p>
+                <div class="card-footer">
+                    <span class="card-rate">₹150</span>
+                    <button class="btn-cart" onclick="addToCart('Snake Plant','images/Snake-Plant.webp','5.5 - 7.5',150)">🛒 Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card" id="money">
+            <div class="plant-card-img">
+                <img src="images/Money-Plant.webp" alt="Money Plant">
+                <span class="badge-place">🏠 Indoor</span>
+                <span class="badge-sun">Medium Light</span>
+                <button class="card-arrow" onclick="addToCart('Money Plant','images/Money-Plant.webp','6.0 - 7.0',175)">→</button>
+            </div>
+            <div class="plant-card-body">
+                <h3>Money Plant</h3>
+                <div class="tag-row">
+                    <span class="tag tag-green">🏠 Indoor</span>
+                    <span class="tag tag-blue">💧 Weekly</span>
+                    <span class="tag tag-yellow">☀️ Medium</span>
+                </div>
+                <p class="card-desc">Fast-growing climber. Grows in soil or water, brings positive energy.</p>
+                <div class="card-footer">
+                    <span class="card-rate">₹175</span>
+                    <button class="btn-cart" onclick="addToCart('Money Plant','images/Money-Plant.webp','6.0 - 7.0',175)">🛒 Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card" id="croton">
+            <div class="plant-card-img">
+                <img src="images/croton.webp" alt="Croton">
+                <span class="badge-place">🏠 Indoor</span>
+                <span class="badge-sun">Full Sun</span>
+                <button class="card-arrow" onclick="addToCart('Croton','images/croton.webp','5.5 - 6.5',200)">→</button>
+            </div>
+            <div class="plant-card-body">
+                <h3>Croton</h3>
+                <div class="tag-row">
+                    <span class="tag tag-green">🏠 Indoor</span>
+                    <span class="tag tag-blue">💧 Weekly</span>
+                    <span class="tag tag-orange">🌞 Full Sun</span>
+                </div>
+                <p class="card-desc">Colorful foliage plant. Adds vibrant tropical colors to any indoor space.</p>
+                <div class="card-footer">
+                    <span class="card-rate">₹200</span>
+                    <button class="btn-cart" onclick="addToCart('Croton','images/croton.webp','5.5 - 6.5',200)">🛒 Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card" id="rose">
+            <div class="plant-card-img">
+                <img src="images/rose.jpg" alt="Rose">
+                <span class="badge-place">🌳 Outdoor</span>
+                <span class="badge-sun">Full Sun</span>
+                <button class="card-arrow" onclick="addToCart('Rose','images/rose.jpg','6.0 - 6.5',180)">→</button>
+            </div>
+            <div class="plant-card-body">
+                <h3>Rose</h3>
+                <div class="tag-row">
+                    <span class="tag tag-green">🌳 Outdoor</span>
+                    <span class="tag tag-blue">💧 Daily</span>
+                    <span class="tag tag-orange">🌞 Full Sun</span>
+                </div>
+                <p class="card-desc">Classic flowering beauty with fragrant blooms. Needs full sunlight.</p>
+                <div class="card-footer">
+                    <span class="card-rate">₹180</span>
+                    <button class="btn-cart" onclick="addToCart('Rose','images/rose.jpg','6.0 - 6.5',180)">🛒 Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card" id="aloe">
+            <div class="plant-card-img">
+                <img src="images/aloe-vera.jpg" alt="Aloe Vera">
+                <span class="badge-place">🌳 Outdoor</span>
+                <span class="badge-sun">Low Light</span>
+                <button class="card-arrow" onclick="addToCart('Aloe Vera','images/aloe-vera.jpg','6.0 - 8.0',150)">→</button>
+            </div>
+            <div class="plant-card-body">
+                <h3>Aloe Vera</h3>
+                <div class="tag-row">
+                    <span class="tag tag-green">🌳 Outdoor</span>
+                    <span class="tag tag-blue">💧 Rare Water</span>
+                    <span class="tag tag-yellow">☀️ Low Light</span>
+                </div>
+                <p class="card-desc">Medicinal succulent. Skin healing gel inside leaves. Very low maintenance.</p>
+                <div class="card-footer">
+                    <span class="card-rate">₹150</span>
+                    <button class="btn-cart" onclick="addToCart('Aloe Vera','images/aloe-vera.jpg','6.0 - 8.0',150)">🛒 Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card" id="sunflower">
+            <div class="plant-card-img">
+                <img src="images/sunflower.png" alt="Sunflower">
+                <span class="badge-place">🌳 Outdoor</span>
+                <span class="badge-sun">Full Sun</span>
+                <button class="card-arrow" onclick="addToCart('Sunflower','images/sunflower.png','6.0 - 7.5',160)">→</button>
+            </div>
+            <div class="plant-card-body">
+                <h3>Sunflower</h3>
+                <div class="tag-row">
+                    <span class="tag tag-green">🌳 Outdoor</span>
+                    <span class="tag tag-blue">💧 2x Week</span>
+                    <span class="tag tag-orange">🌞 Full Sun</span>
+                </div>
+                <p class="card-desc">Bright &amp; cheerful. Grows tall fast and attracts bees &amp; butterflies.</p>
+                <div class="card-footer">
+                    <span class="card-rate">₹160</span>
+                    <button class="btn-cart" onclick="addToCart('Sunflower','images/sunflower.png','6.0 - 7.5',160)">🛒 Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card" id="hibiscus">
+            <div class="plant-card-img">
+                <img src="images/hibiscus.webp" alt="Hibiscus">
+                <span class="badge-place">🌳 Outdoor</span>
+                <span class="badge-sun">Medium Light</span>
+                <button class="card-arrow" onclick="addToCart('Hibiscus','images/hibiscus.webp','6.0 - 7.0',220)">→</button>
+            </div>
+            <div class="plant-card-body">
+                <h3>Hibiscus</h3>
+                <div class="tag-row">
+                    <span class="tag tag-green">🌳 Outdoor</span>
+                    <span class="tag tag-blue">💧 Daily</span>
+                    <span class="tag tag-yellow">☀️ Medium</span>
+                    <span class="tag tag-purple">🎯 Advanced</span>
+                </div>
+                <p class="card-desc">Beautiful flowering shrub. Needs regular pruning and care.</p>
+                <div class="card-footer">
+                    <span class="card-rate">₹220</span>
+                    <button class="btn-cart" onclick="addToCart('Hibiscus','images/hibiscus.webp','6.0 - 7.0',220)">🛒 Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card" id="marigold">
+            <div class="plant-card-img">
+                <img src="images/marigold.webp" alt="Marigold">
+                <span class="badge-place">🌳 Outdoor</span>
+                <span class="badge-sun">Medium Light</span>
+                <button class="card-arrow" onclick="addToCart('Marigold','images/marigold.webp','5.5 - 7.0',155)">→</button>
+            </div>
+            <div class="plant-card-body">
+                <h3>Marigold</h3>
+                <div class="tag-row">
+                    <span class="tag tag-green">🌳 Outdoor</span>
+                    <span class="tag tag-blue">💧 2x Week</span>
+                    <span class="tag tag-yellow">☀️ Medium</span>
+                </div>
+                <p class="card-desc">Easy to grow. Repels insects naturally. Perfect for beginner gardeners.</p>
+                <div class="card-footer">
+                    <span class="card-rate">₹155</span>
+                    <button class="btn-cart" onclick="addToCart('Marigold','images/marigold.webp','5.5 - 7.0',155)">🛒 Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card" id="zinnia">
+            <div class="plant-card-img">
+                <img src="images/zinnia1.jpg" alt="Zinnia">
+                <span class="badge-place">🌳 Outdoor</span>
+                <span class="badge-sun">Medium Light</span>
+                <button class="card-arrow" onclick="addToCart('Zinnia','images/zinnia.webp','5.5 - 7.0',170)">→</button>
+            </div>
+            <div class="plant-card-body">
+                <h3>Zinnia</h3>
+                <div class="tag-row">
+                    <span class="tag tag-green">🌳 Outdoor</span>
+                    <span class="tag tag-blue">💧 Weekly</span>
+                    <span class="tag tag-yellow">☀️ Medium</span>
+                </div>
+                <p class="card-desc">Colorful flowering plant. Grows quickly from seeds. Great for beginners.</p>
+                <div class="card-footer">
+                    <span class="card-rate">₹170</span>
+                    <button class="btn-cart" onclick="addToCart('Zinnia','images/zinnia.webp','5.5 - 7.0',170)">🛒 Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<div id="toast"></div>
+
+<script>
+let place = localStorage.getItem("place");
+let sun   = localStorage.getItem("sun");
+let level = localStorage.getItem("level");
+
+window.onload = function(){
+    let name = localStorage.getItem("username");
+    if(name) document.getElementById("greetName").textContent = name;
+    updateCartBadge();
+    showRecommend();
+};
+
+function updateCartBadge(){
+    let cart  = JSON.parse(localStorage.getItem("cart")) || [];
+    let total = cart.reduce((s,i) => s + i.qty, 0);
+    let badge = document.getElementById("cartBadge");
+    if(total > 0){ badge.style.display = "flex"; badge.textContent = total; }
+    else { badge.style.display = "none"; }
+}
+
+function hideAll(){
+    document.querySelectorAll(".plant-card").forEach(c => c.style.display = "none");
+}
+
+function showRecommend(){
+    hideAll();
+    document.getElementById("tabRecommend").classList.add("active");
+    document.getElementById("tabAll").classList.remove("active");
+    document.getElementById("btnRecommend").classList.add("active");
+    document.getElementById("btnAll").classList.remove("active");
+    if(place=="Indoor"  && sun=="Low")                          document.getElementById("snake").style.display    = "flex";
+    if(place=="Indoor"  && sun=="Medium")                       document.getElementById("money").style.display    = "flex";
+    if(place=="Indoor"  && sun=="High")                         document.getElementById("croton").style.display   = "flex";
+    if(place=="Outdoor" && sun=="Low")                          document.getElementById("aloe").style.display     = "flex";
+    if(place=="Outdoor" && sun=="High")                         document.getElementById("rose").style.display     = "flex";
+    if(place=="Outdoor" && sun=="High")                         document.getElementById("sunflower").style.display= "flex";
+    if(place=="Outdoor" && sun=="Medium" && level=="Advanced")  document.getElementById("hibiscus").style.display = "flex";
+    if(place=="Outdoor" && sun=="Medium" && level=="Beginner")  document.getElementById("marigold").style.display = "flex";
+    if(place=="Outdoor" && sun=="Medium" && level=="Beginner")  document.getElementById("zinnia").style.display   = "flex";
+}
+
+function showAll(){
+    document.querySelectorAll(".plant-card").forEach(c => c.style.display = "flex");
+    document.getElementById("tabAll").classList.add("active");
+    document.getElementById("tabRecommend").classList.remove("active");
+    document.getElementById("btnAll").classList.add("active");
+    document.getElementById("btnRecommend").classList.remove("active");
+}
+
+function addToCart(name, img, ph, rate){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let existing = cart.find(item => item.name === name);
+    if(existing){ existing.qty += 1; }
+    else { cart.push({ name, img, ph, rate, qty:1 }); }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartBadge();
+    showToast("🛒 " + name + " added to cart!");
+}
+
+function showToast(msg){
+    let t = document.getElementById("toast");
+    t.textContent = msg;
+    t.style.opacity = "1";
+    t.style.transform = "translateX(-50%) translateY(0)";
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => {
+        t.style.opacity = "0";
+        t.style.transform = "translateX(-50%) translateY(20px)";
+    }, 2200);
+}
+</script>
+</body>
+</html>

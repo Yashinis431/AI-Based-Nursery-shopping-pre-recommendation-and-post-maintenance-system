@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plant Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="plants-body">
+
+<!-- NAV -->
+<nav class="plants-nav">
+    <a class="plants-nav-brand" href="dashboard.html"><span>🌱</span> Nursery</a>
+    <div class="plants-nav-links">
+        <a href="dashboard.html">Home</a>
+        <a href="plants.html" id="btnRecommend" class="active">⭐ Recommended</a>
+        <a href="plants.html" id="btnAll">🌿 All Plants</a>
+        <a href="plants-details.html">📋 Plant Details</a>
+    </div>
+    <div class="plants-nav-right">
+        <div class="nav-greet">Welcome, <strong id="greetName">Guest</strong></div>
+        <a class="nav-cart" href="cart.html">
+            🛒 Cart
+            <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+        </a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="plants-hero">
+    <div class="plants-hero-bg"></div>
+
+    <div class="hero-plants-float">
+        <div class="hp hp1"><img src="images/Snake-Plant.webp" alt="Snake Plant"></div>
+        <div class="hp hp2"><img src="images/Money-Plant.webp" alt="Money Plant"></div>
+        <div class="hp hp3"><img src="images/croton.webp" alt="Croton"></div>
+    </div>
+
+    <div class="hero-content">
+        <div class="plants-hero-tag"><div class="hero-dot"></div> Smart Gardening</div>
+        <h1>Make a <em>Beautiful</em><br>Garden With<br>Your Own Hand</h1>
+        <p>Find Your Dream Plant for your home decoration with us and we will make it happen — perfectly matched to your space &amp; lifestyle.</p>
+        <div class="hero-btns">
+            <a class="plants-btn-primary" href="plants.html">🌿 Explore Plants</a>
+            <a class="btn-outline" href="cart.html">🛒 View Cart</a>
+        </div>
+    </div>
+</section>
+
+<!-- DETAILS CONTENT -->
+<div class="main">
+    <button class="back-icon-btn" onclick="window.location.href='plants.html'" title="Back">←</button>
+    <h1 class="page-title">🌿 Plant Details</h1>
+    <p class="page-subtitle">Learn about each plant before you buy</p>
+
+    <div class="container">
+
+        <div class="detail-card">
+            <img src="images/Snake-Plant.webp" alt="Snake Plant">
+            <div class="detail-card-body">
+                <h3>Snake Plant</h3>
+                <ul>
+                    <li>Air purifying plant</li>
+                    <li>Survives low light</li>
+                    <li>Water once in 10–14 days</li>
+                    <li>Best for bedroom &amp; office</li>
+                    <li>Removes toxins from air</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <img src="images/Money-Plant.webp" alt="Money Plant">
+            <div class="detail-card-body">
+                <h3>Money Plant</h3>
+                <ul>
+                    <li>Grows in soil &amp; water</li>
+                    <li>Needs medium sunlight</li>
+                    <li>Water weekly</li>
+                    <li>Fast growing plant</li>
+                    <li>Brings positive energy</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <img src="images/croton.webp" alt="Croton">
+            <div class="detail-card-body">
+                <h3>Croton</h3>
+                <ul>
+                    <li>Colorful indoor plant</li>
+                    <li>Needs bright indirect light</li>
+                    <li>Water when soil feels dry</li>
+                    <li>Best for living room</li>
+                    <li>Adds vibrant color indoors</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <img src="images/rose.jpg" alt="Rose">
+            <div class="detail-card-body">
+                <h3>Rose</h3>
+                <ul>
+                    <li>Flowering plant</li>
+                    <li>Needs full sunlight</li>
+                    <li>Daily watering required</li>
+                    <li>Needs pruning</li>
+                    <li>Beautiful fragrance flowers</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <img src="images/aloe-vera.jpg" alt="Aloe Vera">
+            <div class="detail-card-body">
+                <h3>Aloe Vera</h3>
+                <ul>
+                    <li>Medicinal plant</li>
+                    <li>Needs very less water</li>
+                    <li>Grows in bright sunlight</li>
+                    <li>Skin healing gel inside leaves</li>
+                    <li>Very low maintenance</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <img src="images/sunflower.png" alt="Sunflower">
+            <div class="detail-card-body">
+                <h3>Sunflower</h3>
+                <ul>
+                    <li>Bright outdoor flowering plant</li>
+                    <li>Needs full direct sunlight</li>
+                    <li>Water 2–3 times a week</li>
+                    <li>Grows very tall &amp; fast</li>
+                    <li>Attracts bees &amp; butterflies</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <img src="images/hibiscus.webp" alt="Hibiscus">
+            <div class="detail-card-body">
+                <h3>Hibiscus</h3>
+                <ul>
+                    <li>Beautiful flowering shrub</li>
+                    <li>Needs medium sunlight</li>
+                    <li>Water daily in summer</li>
+                    <li>Needs regular pruning</li>
+                    <li>Best for experienced gardeners</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <img src="images/marigold.webp" alt="Marigold">
+            <div class="detail-card-body">
+                <h3>Marigold</h3>
+                <ul>
+                    <li>Easy to grow outdoors</li>
+                    <li>Needs medium sunlight</li>
+                    <li>Water every 2 days</li>
+                    <li>Repels insects naturally</li>
+                    <li>Perfect for beginners</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <img src="images/zinnia.webp" alt="Zinnia">
+            <div class="detail-card-body">
+                <h3>Zinnia</h3>
+                <ul>
+                    <li>Colorful flowering plant</li>
+                    <li>Needs medium sunlight</li>
+                    <li>Water when topsoil dries</li>
+                    <li>Grows quickly from seeds</li>
+                    <li>Great for beginner gardeners</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

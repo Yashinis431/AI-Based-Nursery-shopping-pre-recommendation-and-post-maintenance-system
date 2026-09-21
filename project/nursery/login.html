@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nursery — My Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+
+<!-- LEFT: image panel -->
+<div class="login-left">
+    <img class="login-left-img" src="images/flower.jpg" alt="Nursery">
+    <div class="login-left-overlay"></div>
+    <a class="left-logo" href="dashboard.html">🌱 Nursery</a>
+    <div class="login-left-content">
+        <span class="left-tag">Your Green Space</span>
+        <h2 class="left-title">Plants that <em>breathe</em><br>life into your world</h2>
+        <p class="left-desc">Manage your profile, track your orders and discover new plants curated just for you.</p>
+    </div>
+</div>
+
+<!-- RIGHT: form panel -->
+<div class="login-right">
+    <div class="form-wrap">
+        <h1 class="form-title">My Profile</h1>
+        <p class="form-subtitle">View and update your account details</p>
+        <div class="divider-line"></div>
+
+        <div class="login-field">
+            <label>Full Name</label>
+            <input type="text" id="fname" placeholder="Enter your name">
+        </div>
+
+        <div class="login-field">
+            <label>Email Address</label>
+            <input type="email" id="femail" placeholder="Enter your email">
+        </div>
+
+        <div class="login-field field-id">
+            <label>Purchase ID</label>
+            <div class="id-wrap">
+                <input type="text" id="fpurchase" placeholder="Paste or type your Purchase ID">
+                <button class="copy-btn" onclick="copyId()">Copy</button>
+            </div>
+        </div>
+
+        <!-- Error box (shown only on failure) -->
+        <div id="statusBox" style="display:none; border-radius:10px; padding:12px 16px; margin-bottom:14px; font-size:13.5px; font-weight:500;"></div>
+
+        <!-- ONE button -->
+        <button class="btn-save" onclick="checkAndOpen()">
+            🔍 Check &amp; Open Leaf Detection
+        </button>
+
+        <div class="form-footer">
+            <span>Back to store?</span>
+            <a href="dashboard.html">← Browse Plants</a>
+        </div>
+    </div>
+</div>
+
+<div class="login-toast" id="toast"></div>
+
+<script>
+window.onload = function(){
+    document.getElementById("fname").value  = localStorage.getItem("username")  || "";
+    document.getElementById("femail").value = localStorage.getItem("useremail") || localStorage.getItem("email") || "";
+
+    let pid = localStorage.getItem("purchaseId");
+    if(!pid){
+        pid = "NRS-" + Date.now().toString(36).toUpperCase() + "-" + Math.random().toString(36).substr(2,4).toUpperCase();
+        localStorage.setItem("purchaseId", pid);
+    }
+    document.getElementById("fpurchase").value = pid;
+};
+
+function checkAndOpen(){
+    // Save typed values to localStorage
+    let name  = document.getElementById("fname").value.trim();
+    let email = document.getElementById("femail").value.trim();
+    if(name)  localStorage.setItem("username",  name);
+    if(email){ localStorage.setItem("useremail", email); localStorage.setItem("email", email); }
+
+    let errors = [];
+
+    let storedName  = localStorage.getItem("username") || "";
+    if(!storedName.trim()) errors.push("❌ Name not found — please enter your name");
+
+    let storedEmail = localStorage.getItem("useremail") || localStorage.getItem("email") || "";
+    if(!storedEmail.trim()) errors.push("❌ Email not found — please enter your email");
+    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(storedEmail)) errors.push("❌ Email format is invalid");
+
+    let history = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
+    if(history.length === 0) errors.push("❌ No purchase history — please buy a plant first");
+
+    let box = document.getElementById("statusBox");
+
+    if(errors.length > 0){
+        box.style.display    = "block";
+        box.style.background = "linear-gradient(135deg,#fdecea,#fff5f5)";
+        box.style.border     = "1.5px solid #e57373";
+        box.style.color      = "#c62828";
+        box.innerHTML = "<strong>⚠️ Cannot open Leaf Detection:</strong><br><br>" +
+                        errors.map(e => "• " + e).join("<br>");
+        showToast("⚠️ Please fix the errors");
+    } else {
+        box.style.display    = "block";
+        box.style.background = "linear-gradient(135deg,#e8f5e9,#f1f8e9)";
+        box.style.border     = "1.5px solid #66bb6a";
+        box.style.color      = "#2e7d32";
+        box.innerHTML        = "<strong>✅ Verification Successful!</strong>";
+        setTimeout(function(){ window.location.href = "leaf_detection.html"; }, 1200);
+    }
+}
+
+function copyId(){
+    let val = document.getElementById("fpurchase").value;
+    navigator.clipboard.writeText(val).then(() => showToast("📋 Purchase ID copied!"));
+}
+
+function showToast(msg){
+    let t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(t._t);
+    t._t = setTimeout(() => t.classList.remove("show"), 2800);
+}
+</script>
+
+</body>
+</html>

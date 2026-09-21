@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Cart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="plants-body">
+
+<!-- NAV -->
+<nav class="plants-nav">
+    <a class="plants-nav-brand" href="dashboard.html"><span>🌱</span> Nursery</a>
+    <div class="plants-nav-links">
+        <a href="dashboard.html">Home</a>
+        <a href="plants.html" id="btnRecommend" class="active">⭐ Recommended</a>
+        <a href="plants.html" id="btnAll">🌿 All Plants</a>
+        <a href="plants-details.html">📋 Plant Details</a>
+    </div>
+    <div class="plants-nav-right">
+        <div class="nav-greet">Welcome, <strong id="greetName">Guest</strong></div>
+        <a class="nav-cart" href="cart.html">
+            🛒 Cart
+            <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+        </a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="plants-hero">
+    <div class="plants-hero-bg"></div>
+
+    <div class="hero-plants-float">
+        <div class="hp hp1"><img src="images/Snake-Plant.webp" alt="Snake Plant"></div>
+        <div class="hp hp2"><img src="images/Money-Plant.webp" alt="Money Plant"></div>
+        <div class="hp hp3"><img src="images/croton.webp" alt="Croton"></div>
+    </div>
+
+    <div class="hero-content">
+        <div class="plants-hero-tag"><div class="hero-dot"></div> Smart Gardening</div>
+        <h1>Make a <em>Beautiful</em><br>Garden With<br>Your Own Hand</h1>
+        <p>Find Your Dream Plant for your home decoration with us and we will make it happen — perfectly matched to your space &amp; lifestyle.</p>
+        <div class="hero-btns">
+            <a class="plants-btn-primary" href="plants.html">🌿 Explore Plants</a>
+            <a class="btn-outline" href="plants-details.html">📋 Plant Details</a>
+        </div>
+    </div>
+</section>
+
+<!-- CART CONTENT -->
+<div class="main">
+    <button class="back-icon-btn" onclick="window.location.href='plants.html'" title="Back">←</button>
+    <h1 class="page-title">🛒 Your Cart</h1>
+
+    <div class="container" id="cartContainer"></div>
+    <div id="totalSection"></div>
+</div>
+
+<style>
+.purchase-success-box {
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+    border: 2px solid #66bb6a;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    animation: fadeInPop 0.4s ease;
+}
+.purchase-success-box .success-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2e7d32;
+}
+.purchase-success-box .success-id {
+    font-size: 13px;
+    color: #388e3c;
+    font-family: monospace;
+    background: #fff;
+    border: 1px dashed #a5d6a7;
+    border-radius: 6px;
+    padding: 4px 10px;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+.purchase-success-box .success-plant {
+    font-size: 13px;
+    color: #555;
+}
+@keyframes fadeInPop {
+    from { opacity: 0; transform: scale(0.95) translateY(6px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+</style>
+
+<script>
+window.onload = showCart;
+
+/* ---------- Generate unique Purchase ID ---------- */
+function generatePurchaseID() {
+    let ts  = Date.now().toString(36).toUpperCase();
+    let rnd = Math.random().toString(36).substring(2, 6).toUpperCase();
+    return "ORD-" + ts + "-" + rnd;
+}
+
+/* ---------- Save purchase to localStorage ---------- */
+function savePurchase(item, purchaseID) {
+    let history = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
+    history.push({
+        purchaseID  : purchaseID,
+        plantName   : item.name,
+        qty         : item.qty,
+        rate        : item.rate,
+        total       : item.rate * item.qty,
+        img         : item.img,
+        purchasedAt : new Date().toLocaleString()
+    });
+    localStorage.setItem("purchaseHistory", JSON.stringify(history));
+}
+
+/* ---------- Show cart ---------- */
+function showCart(){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let container   = document.getElementById("cartContainer");
+    let totalSection = document.getElementById("totalSection");
+
+    container.innerHTML  = "";
+    totalSection.innerHTML = "";
+
+    // Restore greet name
+    let name = localStorage.getItem("username");
+    if(name) document.getElementById("greetName").textContent = name;
+
+    if(cart.length === 0){
+        container.innerHTML = "<h3 style='color:#8aad92;font-family:Playfair Display,serif;text-align:center;width:100%;'>Cart is Empty 😢</h3>";
+        return;
+    }
+
+    let grandTotal = 0;
+
+    cart.forEach((item, index) => {
+        let subtotal = item.rate * item.qty;
+        grandTotal  += subtotal;
+        container.innerHTML += `
+        <div class="card" id="cartItem${index}">
+            <img src="${item.img}" style="width:100%;height:180px;object-fit:cover;">
+            <div class="info">
+                <h3>${item.name}</h3>
+                <p>pH: ${item.ph}</p>
+                <p class="item-rate">₹${item.rate} per plant</p>
+                <div class="qty-row">
+                    <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+                    <span class="qty-num" id="qty${index}">${item.qty}</span>
+                    <button class="qty-btn" onclick="changeQty(${index}, +1)">+</button>
+                </div>
+                <p class="item-subtotal">Subtotal: ₹<span id="sub${index}">${subtotal}</span></p>
+                <div class="btn-row">
+                    <button class="btn-purchase" id="purchaseBtn${index}" onclick="purchaseItem(${index})">🛍 Purchase</button>
+                    <button class="btn-remove" onclick="removeItem(${index})">Remove</button>
+                </div>
+                <!-- Success message will be injected here -->
+                <div id="msg${index}"></div>
+            </div>
+        </div>`;
+    });
+
+    let rows = cart.map(item =>
+        `<div class="total-row"><span>${item.name} x${item.qty}</span><span>₹${item.rate * item.qty}</span></div>`
+    ).join("");
+
+    totalSection.innerHTML = `
+    <div class="total-box">
+        <h3>🧾 Order Summary</h3>
+        ${rows}
+        <div class="total-final">
+            <span>Total</span>
+            <span>₹${grandTotal}</span>
+        </div>
+    </div>`;
+}
+
+/* ---------- Purchase item ---------- */
+function purchaseItem(index){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let item = cart[index];
+
+    // Generate purchase ID
+    let purchaseID = generatePurchaseID();
+
+    // Save to localStorage purchaseHistory
+    savePurchase(item, purchaseID);
+
+    // Disable purchase button
+    let btn = document.getElementById("purchaseBtn" + index);
+    btn.disabled     = true;
+    btn.style.opacity = "0.5";
+    btn.style.cursor  = "default";
+
+    // Show success box with ID and plant name
+    let msgDiv = document.getElementById("msg" + index);
+    msgDiv.innerHTML = `
+        <div class="purchase-success-box">
+            <div class="success-title">✅ Purchased Successfully!</div>
+            <div class="success-plant">🌿 Plant &nbsp;: <strong>${item.name}</strong></div>
+            <div class="success-id">🧾 Order ID : ${purchaseID}</div>
+        </div>`;
+}
+
+/* ---------- Change quantity ---------- */
+function changeQty(index, delta){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart[index].qty += delta;
+    if(cart[index].qty < 1) cart[index].qty = 1;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    showCart();
+}
+
+/* ---------- Remove item ---------- */
+function removeItem(index){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    showCart();
+}
+</script>
+
+</body>
+</html>

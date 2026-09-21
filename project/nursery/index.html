@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Gardening</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="index-body">
+
+<!-- Background -->
+<div class="bg-wrap">
+    <div class="bg-left"></div>
+    <div class="bg-photo"></div>
+    <div class="bg-dots"></div>
+</div>
+<span class="leaf l1">🌿</span>
+<span class="leaf l2">🌿</span>
+<span class="leaf l3">🌿</span>
+
+<!-- RIGHT WELCOME PANEL -->
+<div class="right-welcome">
+    <div class="welcome-tag"><div class="welcome-dot"></div> Welcome</div>
+    <div class="welcome-title">Find your<br><em>perfect</em><br>plant 🌿</div>
+    <p class="welcome-sub">Tell us about your space and sunlight — we'll recommend the ideal plant just for you.</p>
+    <div class="welcome-stats">
+        <div class="wstat">
+            <div class="wstat-num">9+</div>
+            <div class="wstat-label">Varieties</div>
+        </div>
+        <div class="wstat">
+            <div class="wstat-num">100%</div>
+            <div class="wstat-label">Natural</div>
+        </div>
+        <div class="wstat">
+            <div class="wstat-num">Free</div>
+            <div class="wstat-label">Care Guide</div>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+
+    <!-- MAIN -->
+    <div class="index-main">
+        <div class="index-card">
+
+            <span class="tm">Smart <span class="tm-leaf">🌿</span></span>
+            <span class="ti">Gardening</span>
+            <p class="sub">Find the perfect plant for your space &amp; lifestyle</p>
+
+            <div class="div"></div>
+
+            <label>👤 Your Name</label>
+            <input type="text" id="username" placeholder="Enter your name">
+
+            <label>📧 Email</label>
+            <input type="email" id="useremail" placeholder="Enter your email">
+
+            <div class="row2">
+                <div>
+                    <label>📍 Placement</label>
+                    <select id="place">
+                        <option>🏠 Indoor</option>
+                        <option>🌳 Outdoor</option>
+                    </select>
+                </div>
+                <div>
+                    <label>🌱 Experience</label>
+                    <select id="level">
+                        <option>🌱 Beginner</option>
+                        <option>🌿 Advanced</option>
+                    </select>
+                </div>
+            </div>
+
+            <label>🌞 Sunlight</label>
+            <select id="sun">
+                <option>🔆 Low Light</option>
+                <option>☀️ Medium Light</option>
+                <option>🌞 High Light</option>
+            </select>
+
+            <button class="btn-go" onclick="goNext()">🌿 &nbsp;Find My Plants</button>
+            <a class="back-link" href="dashboard.html">← Back to Home</a>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+function goNext(){
+    let name = document.getElementById("username").value.trim();
+    if(!name){
+        let inp = document.getElementById("username");
+        inp.focus();
+        inp.style.borderColor = "#e05c5c";
+        inp.style.boxShadow   = "0 0 0 4px rgba(224,92,92,0.12)";
+        setTimeout(() => { inp.style.borderColor = ""; inp.style.boxShadow = ""; }, 1600);
+        return;
+    }
+    let email = document.getElementById("useremail").value.trim();
+    let emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!email || !emailValid){
+        let inp = document.getElementById("useremail");
+        inp.focus();
+        inp.style.borderColor = "#e05c5c";
+        inp.style.boxShadow   = "0 0 0 4px rgba(224,92,92,0.12)";
+        setTimeout(() => { inp.style.borderColor = ""; inp.style.boxShadow = ""; }, 1600);
+        return;
+    }
+    let pv = document.getElementById("place").value.replace(/[^\w\s]/gi,'').trim();
+    let sv = document.getElementById("sun").value.replace(/[^\w\s]/gi,'').trim();
+    let lv = document.getElementById("level").value.replace(/[^\w\s]/gi,'').trim();
+    let sm = {"Low Light":"Low","Medium Light":"Medium","High Light":"High"};
+    localStorage.setItem("username", name);
+    localStorage.setItem("useremail", email);
+    localStorage.setItem("place",    pv || "Indoor");
+    localStorage.setItem("sun",      sm[sv] || sv);
+    localStorage.setItem("level",    lv || "Beginner");
+    window.location.href = "plants.html";
+}
+</script>
+
+</body>
+</html>
